@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'PhatoneRegular';
+    src: url('font/phatone-regular-webfont.eot');
+    src: url('font/phatone-regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('font/phatone-regular-webfont.woff') format('woff'),
+    url('font/phatone-regular-webfont.ttf') format('truetype'),
+    url('font/phatone-regular-webfont.svg#PhatoneRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+body {
+    font-family: PhatoneRegular;
+}
+#stage {
+
+}
