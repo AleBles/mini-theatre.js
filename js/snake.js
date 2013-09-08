@@ -15,7 +15,8 @@ var snake = (function () {
         dir = 2,
         moves = [[-1, 0], [0, -1], [1, 0], [0, 1]],
         hit,
-        interval;
+        timeout,
+        speed = 150;
 
     function move(e) {
         var evt  = e || (event || null),
@@ -38,6 +39,12 @@ var snake = (function () {
     }
 
     return {
+        get speed () {
+            return speed;
+        },
+        set speed (value) {
+            speed = value;
+        },
         init: function () {
             var self = this;
 
@@ -48,7 +55,7 @@ var snake = (function () {
 
             document.onkeydown = move;
 
-            interval = setInterval(self.tick.bind(self), 150);
+            timeout = setTimeout(self.tick.bind(self), speed);
 
             placeFood();
         },
@@ -58,7 +65,7 @@ var snake = (function () {
             length = 0;
             vx = 0;
             vy = 0;
-            interval = null;
+            timeout = null;
             ctx.clearRect(0, 0, x * z, y * z);
         },
         tick: function () {
@@ -72,11 +79,11 @@ var snake = (function () {
 
             for (part in body) {
                 if (body.hasOwnProperty(part) && body[part][0] === vx && body[part][1] === vy) {
-                    clearInterval(interval);
+                    clearInterval(timeout);
                     a = confirm(body.length + ' pts! play again?');
                     if (a) {
                         self.reset();
-                        interval = setInterval(self.tick.bind(self), 150);
+                        timeout = setTimeout(self.tick.bind(self), speed);
                         placeFood();
                     }
                     return;
@@ -98,6 +105,7 @@ var snake = (function () {
 
             body.push([vx, vy]);
             ctx.fillRect(x * vx + 1, 20 + y * vy + 1, z - 2, z - 2);
+            timeout = setTimeout(self.tick.bind(self), speed);
         }
     };
 }());

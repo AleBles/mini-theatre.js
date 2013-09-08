@@ -9,9 +9,27 @@
     font-style: normal;
 
 }
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: PhatoneRegular;
+    margin: 0px;
 }
 #stage {
+    position: relative;
+    float: left;
+    height: 100%;
+    width: 80%;
+    border: 1px inset solid black;
+}
 
+#configure {
+    position: relative;
+    float: right;
+    height: 100%;
+    width: 20%;
+    border: 1px inset solid black;
+    display:none;
 }
