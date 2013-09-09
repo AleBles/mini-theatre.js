@@ -106,6 +106,9 @@ var snake = (function () {
             body.push([vx, vy]);
             ctx.fillRect(x * vx + 1, 20 + y * vy + 1, z - 2, z - 2);
             timeout = setTimeout(self.tick.bind(self), speed);
+        },
+        speak: function() {
+            console.log('Speading at: ' + speed);
         }
     };
 }());

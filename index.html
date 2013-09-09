@@ -4,8 +4,11 @@
     <script type="text/javascript" src="js/snake.js"></script>
     <script type="text/javascript" src="js/configure.js"></script>
     <link type="text/css" href="css/style.css" rel="stylesheet">
+    <script type="text/javascript">
+        var conf = configure({div: 'conf'}, snake);
+    </script>
 </head>
-<body onload="javascript:snake.init();">
+<body onload="javascript:snake.init();conf.init();">
     <canvas id="stage" width="400px" height="420px"></canvas>
     <div id="conf"></div>
 </body>
