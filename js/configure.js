@@ -1,4 +1,6 @@
 var configure = (function (cfg, object) {
+    "use strict";
+
     var config = {
             div: "configure"
         },
@@ -21,23 +23,42 @@ var configure = (function (cfg, object) {
                 case "function":
                     functions[prop] = obj[prop];
                     break;
-            };
+            }
         }
     }
 
     return {
         init: function () {
             var parent = document.getElementById(config.div),
-                title = document.createElement('div');
+                title = document.createElement('div'),
+                prop = null;
 
-            title.innerHTML = '<h4>Public properties</h4>';
+            title.innerHTML = 'Configure.js';
             parent.appendChild(title);
 
-            for (var prop in functions) {
+            for (prop in functions) {
+                var functionChange = document.createElement('div');
+                functionChange.innerHTML = prop + ': ';
                 var button = document.createElement('button');
-                button.onclick = function() {obj[prop]();};
+                button.onclick = obj[prop].bind(obj);
                 button.innerHTML = prop;
-                parent.appendChild(button);
+                functionChange.appendChild(button);
+                parent.appendChild(functionChange);
+            }
+
+            for (prop in numbers) {
+                var numberChange = document.createElement('div');
+                numberChange.innerHTML = prop + ': ';
+                var numberInput = document.createElement('input');
+                numberInput.setAttribute('type', 'text');
+                numberInput.setAttribute('id', prop);
+                numberInput.setAttribute('value', obj[prop]);
+                numberInput.onkeyup = function() {
+                    var thingy = document.getElementById(prop);
+                    obj[prop] = thingy.value;
+                };
+                numberChange.appendChild(numberInput);
+                parent.appendChild(numberChange);
             }
         }
     };

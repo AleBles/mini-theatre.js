@@ -25,11 +25,10 @@ body {
     border: 1px inset solid black;
 }
 
-#configure {
+#conf {
     position: relative;
     float: right;
     height: 100%;
     width: 20%;
-    border: 1px inset solid black;
-    display:none;
+    font-size: 12px;
 }
