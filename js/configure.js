@@ -70,8 +70,6 @@ var configure = (function (cfg, object) {
                 numberInput.setAttribute('value', obj[prop]);
                 numberInput.onchange = function() {
                     var thingy = document.getElementById(prop);
-                    var numval = document.getElementById('num_val_' + prop);
-                    numval.innerHTML=thingy.value;
                     obj[prop] = thingy.value;
                 };
                 numberChange.appendChild(numberInput);
