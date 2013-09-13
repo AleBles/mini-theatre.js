@@ -21,7 +21,7 @@ var snake = (function () {
     function move(e) {
         var evt  = e || (event || null),
             newDir = (evt.keyCode - 37);
-        if ((newDir - dir) % 2 && newDir < 5 && newDir > 0) {
+        if ((newDir - dir) % 2 && newDir <= 3 && newDir >= 0) {
             dir = newDir;
         }
     }
@@ -39,6 +39,9 @@ var snake = (function () {
     }
 
     return {
+        get timeout () {
+            return timeout;
+        },
         get speed () {
             return speed;
         },

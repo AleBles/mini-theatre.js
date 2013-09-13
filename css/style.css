@@ -20,8 +20,8 @@ body {
 #stage {
     position: relative;
     float: left;
-    height: 100%;
-    width: 80%;
+    height: 500px;
+    width: 500px;
     border: 1px inset solid black;
 }
 
@@ -29,6 +29,38 @@ body {
     position: relative;
     float: right;
     height: 100%;
-    width: 20%;
+    width: 300px;
     font-size: 12px;
+    background: #F2F2F2;
+    box-shadow: inset 0 0 5px #000;
+    overflow-x: auto;
+}
+.conf-title {
+    font-size:18px;
+    background: #212121;
+    background: -moz-linear-gradient(top, #373737, #212121);
+    background: -webkit-linear-gradient(top, #373737, #212121);
+    background: -ms-linear-gradient(top, #373737, #212121);
+    background: -o-linear-gradient(top, #373737, #212121);
+    background: linear-gradient(top, #373737, #212121);
+    color:white;
+    padding:5px;
+}
+
+.conf-content {
+    margin: 5px;
+}
+
+.conf-number, .conf-function {
+    position:relative;
+    width:100%;
+    height:50px;
+    border-bottom: 1px dotted black;
+}
+
+.conf-number input, .conf-function button {
+    float:right;
+    width: 100px;
+    margin-top: 10px;
+    margin-right:10px;
 }
