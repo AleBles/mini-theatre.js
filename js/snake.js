@@ -12,23 +12,31 @@ var snake = (function () {
         body = [],
         canvas,
         ctx,
-        dir = 2,
+        dir = mdir = 2,
         moves = [[-1, 0], [0, -1], [1, 0], [0, 1]],
         hit,
         timeout,
-        speed = 150;
+        speed = 150,
+        mq = [];
 
     function move(e) {
         var evt  = e || (event || null),
             newDir = (evt.keyCode - 37);
         if ((newDir - dir) % 2 && newDir <= 3 && newDir >= 0) {
             dir = newDir;
+            mq.push(newDir);
         }
     }
 
     function placeFood() {
         var fx = (Math.floor((Math.random() * (x - 1)) + 1) * z) + (z / 2),
             fy = (Math.floor((Math.random() * (y - 1)) + 1) * z) + (z / 2);
+
+        while(ctx.getImageData(fx, fy, 1, 1).data[3] === 255) {
+            fx = (Math.floor((Math.random() * (x - 1)) + 1) * z) + (z / 2),
+            fy = (Math.floor((Math.random() * (y - 1)) + 1) * z) + (z / 2);
+        };
+
 
         ctx.fillStyle = '#F00';
         ctx.beginPath();
@@ -55,7 +63,7 @@ var snake = (function () {
             ctx = canvas.getContext('2d');
             ctx.font = '12px "PhatoneRegular"';
             ctx.textAlign = 'right';
-
+            mq.push(dir);
             document.onkeydown = move;
 
             timeout = setTimeout(self.tick.bind(self), speed);
@@ -70,6 +78,7 @@ var snake = (function () {
             vy = 0;
             timeout = null;
             ctx.clearRect(0, 0, x * z, y * z);
+            mq.push(dir);
         },
         tick: function () {
             var self = this,
@@ -77,8 +86,11 @@ var snake = (function () {
                 c,
                 a;
 
-            vx = (vx + moves[dir][0]).m(x);
-            vy = (vy + moves[dir][1]).m(y);
+            if (mq.length > 0) {
+                mdir = mq.shift();
+            }
+            vx = (vx + moves[mdir][0]).m(x);
+            vy = (vy + moves[mdir][1]).m(y);
 
             for (part in body) {
                 if (body.hasOwnProperty(part) && body[part][0] === vx && body[part][1] === vy) {
